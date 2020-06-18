@@ -3,13 +3,12 @@ $Logfile = "c:\temp\sysmondeploy.log"
 $SystemSysmonConfig = 'C:\windows\sysmonconfig-export.xml'
 $SysmonLocation = 'c:\windows\'
 $SplunkSysmonConfig = 'C:\Program Files\SplunkUniversalForwarder\etc\apps\TA-Sysmon-deploy\bin\sysmonconfig-export.xml'
-$sysmonexe = '..\bin\Sysmon.exe'
 
 Start-Transcript -Path $Logfile
 function CheckInstallStatus($software)
 {
     # Function to check if software is installed on system
-    $softwareinstalled = (Get-Service -DisplayName $software | Where { $_.DisplayName -match $software }) -ne $null
+    $softwareinstalled = (Get-Service -DisplayName $software | Where-Object { $_.DisplayName -match $software })  -ne $null
     return $softwareinstalled 
 }
 function CheckSysmonVersion()
